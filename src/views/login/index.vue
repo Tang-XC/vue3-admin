@@ -1,27 +1,40 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="data">
+    <el-form
+      class="login-form"
+      :model="formData"
+      :rules="formRules"
+      ref="formRef"
+    >
       <div class="title-container">
-        <h3 class="title"><SvgIcon icon="admin" />用户登录</h3>
+        <h3 class="title"><SvgIcon icon="admin" /> USER LOGIN</h3>
       </div>
       <el-form-item prop="username">
         <el-input
-          v-model="data.username"
+          v-model="formData.username"
           placeholder="Please input username"
           prefix-icon="el-icon-user"
         />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
-          v-model="data.password"
+          v-model="formData.password"
           placeholder="Please input password"
           prefix-icon="el-icon-lock"
-        />
+          :type="showPassword ? 'text' : 'password'"
+        >
+          <template #suffix>
+            <div class="show-pwd" @click="handleShowPassword">
+              <el-icon v-if="!showPassword"><View /></el-icon>
+              <el-icon v-else><Hide /></el-icon>
+            </div>
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button style="width: 100%" type="primary" @click="handleLogin"
-          >Login</el-button
-        >
+        <el-button style="width: 100%" type="primary" @click="handleLogin">
+          Login
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -29,10 +42,53 @@
 <script setup>
 import { ref } from 'vue'
 import SvgIcon from '@/components/SvgIcon'
-const data = ref({
+import { validatePassword } from '@/utils/validate'
+import { useStore } from 'vuex'
+const formRef = ref(null)
+const formData = ref({
   username: '',
   password: ''
 })
+const formRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: 'username is required'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
+const showPassword = ref(false)
+const loading = ref(false)
+const store = useStore()
+const handleLogin = async () => {
+  formRef.value.validate((valid) => {
+    if (!valid) return
+    loading.value = true
+    store
+      .dispatch('user/login', formData.value)
+      .then((res) => {
+        console.log(res)
+        // TODO: 登录后续
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        loading.value = false
+      })
+  })
+}
+const handleShowPassword = () => {
+  showPassword.value = !showPassword.value
+}
 </script>
 <style lang="scss" scoped>
 $bg: #2d3a4b;
@@ -95,13 +151,11 @@ $cursor: #fff;
   }
 
   .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+    padding: 0 10px;
   }
 }
 </style>
