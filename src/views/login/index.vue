@@ -13,14 +13,14 @@
         <el-input
           v-model="formData.username"
           placeholder="Please input username"
-          prefix-icon="el-icon-user"
+          prefix-icon="user"
         />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           v-model="formData.password"
           placeholder="Please input password"
-          prefix-icon="el-icon-lock"
+          prefix-icon="lock"
           :type="showPassword ? 'text' : 'password'"
         >
           <template #suffix>
@@ -44,6 +44,8 @@ import { ref } from 'vue'
 import SvgIcon from '@/components/SvgIcon'
 import { validatePassword } from '@/utils/validate'
 import { useStore } from 'vuex'
+import router from '@/router'
+import { ElMessage } from 'element-plus'
 const formRef = ref(null)
 const formData = ref({
   username: '',
@@ -74,9 +76,9 @@ const handleLogin = async () => {
     loading.value = true
     store
       .dispatch('user/login', formData.value)
-      .then((res) => {
-        console.log(res)
-        // TODO: 登录后续
+      .then(() => {
+        ElMessage.success('login success')
+        router.push('/')
       })
       .catch((err) => {
         console.log(err)
@@ -117,11 +119,9 @@ $cursor: #fff;
       color: #454545;
     }
 
-    ::v-deep .el-input {
-      display: inline-block;
-
+    ::v-deep .el-input__wrapper {
+      background: transparent;
       input {
-        background: transparent;
         border: 0px;
         -webkit-appearance: none;
         border-radius: 0px;
@@ -151,11 +151,12 @@ $cursor: #fff;
   }
 
   .show-pwd {
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
-    padding: 0 10px;
   }
 }
 </style>

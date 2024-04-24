@@ -1,8 +1,23 @@
 const path = require('path')
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
+  // 自动引入Element-plus
+  configureWebpack: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ]
+  },
+  // 处理图标
   chainWebpack(config) {
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()
     config.module
@@ -17,6 +32,8 @@ module.exports = {
       })
       .end()
   },
+
+  // 配置代理服务
   devServer: {
     proxy: {
       '/api': {

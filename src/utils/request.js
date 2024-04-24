@@ -4,6 +4,15 @@ const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
+service.interceptors.request.use(
+  (config) => {
+    config.headers.icode = 'helloqianduanxunlianying'
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 service.interceptors.response.use(
   (response) => {
     const { success, message, data } = response.data
@@ -15,7 +24,13 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    ElMessage.error(error.message)
+    try {
+      const { message } = error.response.data
+      ElMessage.error(message)
+    } catch (_) {
+      ElMessage.error(error.message)
+    }
+
     return Promise.reject(error)
   }
 )
