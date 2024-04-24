@@ -81,7 +81,7 @@ const handleLogin = async () => {
         router.push('/')
       })
       .catch((err) => {
-        console.log(err)
+        ElMessage.error(err)
       })
       .finally(() => {
         loading.value = false

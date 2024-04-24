@@ -1,16 +1,21 @@
-import { login } from '@/api/sys'
-import { setItem, getItem } from '@/utils/storage'
+import { login, getUserInfo } from '@/api/sys'
+import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import router from '@/router'
 import md5 from 'md5'
 export default {
   namespaced: true,
   state: () => ({
-    token: getItem(TOKEN) || ''
+    token: getItem(TOKEN) || '',
+    userInfo: {}
   }),
   mutations: {
     setToken(state, token) {
       state.token = token
       setItem(TOKEN, token)
+    },
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo
     }
   },
   actions: {
@@ -29,6 +34,24 @@ export default {
             reject(err)
           })
       })
+    },
+    getUserInfo(context) {
+      return new Promise((resolve, reject) => {
+        getUserInfo()
+          .then((res) => {
+            this.commit('user/setUserInfo', res)
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    logout() {
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      removeAllItem()
+      router.push('/login')
     }
   }
 }

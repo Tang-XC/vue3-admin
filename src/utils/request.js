@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import store from '@/store'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
@@ -7,6 +8,9 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     config.headers.icode = 'helloqianduanxunlianying'
+    if (store.getters.token) {
+      config.headers.Authorization = `Bearer ${store.getters.token}`
+    }
     return config
   },
   (error) => {
