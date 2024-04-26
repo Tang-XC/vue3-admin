@@ -1,5 +1,9 @@
 <template>
   <div class="navbar">
+    <div class="left-wrap">
+      <Hamburger />
+      <BreadCrumb />
+    </div>
     <div class="right-menu">
       <el-dropdown placement="bottom-end">
         <div class="avatar-wrapper">
@@ -26,18 +30,30 @@
 <script setup>
 import store from '@/store'
 import { ElMessage } from 'element-plus'
+import Hamburger from './components/Hamburger'
+import BreadCrumb from './components/BreadCrumb'
+
 const logout = () => {
   store.dispatch('user/logout')
   ElMessage.success('logout success')
 }
 </script>
 <style lang="scss" scoped>
+@import '~@/styles/variables.module.scss';
 .navbar {
-  height: 50px;
+  height: $headerHeight;
   overflow: hidden;
   position: relative;
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .left-wrap {
+    display: flex;
+    align-items: center;
+  }
 }
 .right-menu {
   display: flex;

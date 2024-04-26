@@ -44,7 +44,6 @@ import { ref } from 'vue'
 import SvgIcon from '@/components/SvgIcon'
 import { validatePassword } from '@/utils/validate'
 import { useStore } from 'vuex'
-import router from '@/router'
 import { ElMessage } from 'element-plus'
 const formRef = ref(null)
 const formData = ref({
@@ -78,7 +77,6 @@ const handleLogin = async () => {
       .dispatch('user/login', formData.value)
       .then(() => {
         ElMessage.success('login success')
-        router.push('/')
       })
       .catch((err) => {
         ElMessage.error(err)

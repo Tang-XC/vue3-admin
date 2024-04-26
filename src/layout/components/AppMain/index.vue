@@ -1,9 +1,11 @@
 <template>
-  <div class="app-main">This is the app main content</div>
+  <div class="app-main">
+    <router-view></router-view>
+  </div>
 </template>
 <style lang="scss" scoped>
 .app-main {
-  min-height: calc(100vh - 50px);
+  min-height: 100vh;
   width: 100%;
   overflow: hidden;
   padding: 61px 20px 20px 20px;

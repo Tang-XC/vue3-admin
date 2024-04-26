@@ -15,7 +15,12 @@ module.exports = {
       Components({
         resolvers: [ElementPlusResolver()]
       })
-    ]
+    ],
+    resolve: {
+      fallback: {
+        path: require.resolve('path-browserify')
+      }
+    }
   },
   // 处理图标
   chainWebpack(config) {

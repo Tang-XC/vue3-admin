@@ -1,5 +1,6 @@
 import { login, getUserInfo } from '@/api/sys'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
+import { setTimeStamp } from '@/utils/auth'
 import { TOKEN } from '@/constant'
 import router from '@/router'
 import md5 from 'md5'
@@ -27,7 +28,12 @@ export default {
           password: md5(password)
         })
           .then((data) => {
+            // 登录成功，设置token
             this.commit('user/setToken', data.token)
+            // 跳转到首页
+            router.push('/')
+            // 记录时间戳
+            setTimeStamp()
             resolve()
           })
           .catch((err) => {
