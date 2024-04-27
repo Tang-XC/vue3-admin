@@ -2,9 +2,7 @@
   <div>
     <div class="logo-container">
       <el-image class="logo" src="/logo.svg" />
-      <h1 style="margin-left: 12px" v-if="$store.getters.sidebarOpened">
-        Admin
-      </h1>
+      <h2 class="logo-text" v-if="$store.getters.sidebarOpened">Admin</h2>
     </div>
     <el-scrollbar>
       <SidebarMenu />
@@ -25,5 +23,9 @@ import SidebarMenu from './components/SidebarMenu'
   display: flex;
   align-items: center;
   justify-content: center;
+  .logo-text {
+    margin-left: 12px;
+    color: #fff;
+  }
 }
 </style>

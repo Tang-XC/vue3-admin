@@ -16,7 +16,7 @@
   </el-breadcrumb>
 </template>
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const route = useRoute()
@@ -29,6 +29,9 @@ const getBreadCrumbData = () => {
   )
 }
 watch(route, () => {
+  getBreadCrumbData()
+})
+onMounted(() => {
   getBreadCrumbData()
 })
 </script>

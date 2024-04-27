@@ -7,19 +7,22 @@
       ref="formRef"
     >
       <div class="title-container">
-        <h3 class="title"><SvgIcon icon="admin" /> USER LOGIN</h3>
+        <h3 class="title">
+          <div></div>
+          <div><SvgIcon icon="admin" /> {{ $t('login.title') }}</div>
+        </h3>
       </div>
       <el-form-item prop="username">
         <el-input
           v-model="formData.username"
-          placeholder="Please input username"
+          :placeholder="$t('login.placeholder.username')"
           prefix-icon="user"
         />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           v-model="formData.password"
-          placeholder="Please input password"
+          :placeholder="$t('login.placeholder.password')"
           prefix-icon="lock"
           :type="showPassword ? 'text' : 'password'"
         >
@@ -33,10 +36,13 @@
       </el-form-item>
       <el-form-item>
         <el-button style="width: 100%" type="primary" @click="handleLogin">
-          Login
+          {{ $t('login.login') }}
         </el-button>
       </el-form-item>
     </el-form>
+  </div>
+  <div class="local-container">
+    <Local />
   </div>
 </template>
 <script setup>
@@ -45,6 +51,7 @@ import SvgIcon from '@/components/SvgIcon'
 import { validatePassword } from '@/utils/validate'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
+import Local from '@/layout/components/Navbar/components/Local'
 const formRef = ref(null)
 const formData = ref({
   username: '',
@@ -155,6 +162,17 @@ $cursor: #fff;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+}
+.local-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px 0;
+  div {
+    transform: scale(1.5);
   }
 }
 </style>

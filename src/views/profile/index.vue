@@ -1,6 +1,5 @@
 <template>
   <div class="">
-    {{ $t('msg.test') }}
     <el-pagination layout="total,prev, pager, next" :total="50" />
   </div>
 </template>
