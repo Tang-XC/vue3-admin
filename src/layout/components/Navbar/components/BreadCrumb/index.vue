@@ -23,7 +23,6 @@ const route = useRoute()
 const store = useStore()
 const breadCrumbData = ref([])
 const primaryColor = store.getters.cssVar.primaryColor
-console.log(primaryColor)
 const getBreadCrumbData = () => {
   breadCrumbData.value = route.matched.filter(
     (item) => item.meta && item.meta.title

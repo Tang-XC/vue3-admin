@@ -5,6 +5,7 @@
       <BreadCrumb />
     </div>
     <div class="right-menu">
+      <Local />
       <el-dropdown placement="bottom-end">
         <div class="avatar-wrapper">
           <el-avatar
@@ -32,6 +33,7 @@ import store from '@/store'
 import { ElMessage } from 'element-plus'
 import Hamburger from './components/Hamburger'
 import BreadCrumb from './components/BreadCrumb'
+import Local from './components/Local'
 
 const logout = () => {
   store.dispatch('user/logout')
