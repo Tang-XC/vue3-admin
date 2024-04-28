@@ -5,6 +5,7 @@
       <BreadCrumb />
     </div>
     <div class="right-menu">
+      <Screenfull />
       <Theme />
       <Local />
       <el-dropdown placement="bottom-end">
@@ -36,6 +37,7 @@ import Hamburger from './components/Hamburger'
 import BreadCrumb from './components/BreadCrumb'
 import Theme from './components/Theme'
 import Local from './components/Local'
+import Screenfull from './components/Screenfull'
 
 const logout = () => {
   store.dispatch('user/logout')
