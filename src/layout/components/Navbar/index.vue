@@ -5,6 +5,7 @@
       <BreadCrumb />
     </div>
     <div class="right-menu">
+      <HeaderSearch />
       <Screenfull />
       <Theme />
       <Local />
@@ -38,6 +39,7 @@ import BreadCrumb from './components/BreadCrumb'
 import Theme from './components/Theme'
 import Local from './components/Local'
 import Screenfull from './components/Screenfull'
+import HeaderSearch from './components/HeaderSearch'
 
 const logout = () => {
   store.dispatch('user/logout')
