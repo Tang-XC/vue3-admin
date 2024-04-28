@@ -9,6 +9,8 @@ import { defineComponent } from 'vue'
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import En from 'element-plus/es/locale/lang/en'
+import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'App',
@@ -30,6 +32,10 @@ export default defineComponent({
     }
   },
   setup() {
+    const store = useStore()
+    generateNewStyle(store.getters.primaryColor).then((newStyleText) => {
+      writeNewStyle(newStyleText)
+    })
     return {
       zhCn,
       En

@@ -7,7 +7,6 @@ import installIcons from '@/plugins/icons'
 import i18n from '@/local'
 import './permission'
 import '@/styles/index.scss'
-import 'element-plus/dist/index.css'
 
 const app = createApp(App)
 installElementPlusIcon(app)

@@ -21,6 +21,7 @@ export default {
       articleEditor: 'Article Editor',
       userInfo: 'User Info',
       excelImport: 'Excel Import'
-    }
+    },
+    changeTheme: 'Change Theme'
   }
 }

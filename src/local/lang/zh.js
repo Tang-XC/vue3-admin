@@ -21,6 +21,14 @@ export default {
       articleEditor: '编辑文章',
       userInfo: '用户信息',
       excelImport: 'Excel导入'
+    },
+    changeTheme: '切换主题',
+    handle: {
+      ok: '确定',
+      cancel: '取消',
+      add: '新增',
+      edit: '编辑',
+      delete: '删除'
     }
   }
 }
