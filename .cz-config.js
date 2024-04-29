@@ -28,5 +28,6 @@ module.exports = {
   skipQuestions: ['body', 'footer'],
   // subject文字长度默认是72
   subjectLimit: 72,
-  allowCustomScopes: false
+  // 是否允许scope为空
+  allowCustomScopesOnEmpty: true
 }
