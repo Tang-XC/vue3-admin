@@ -17,9 +17,9 @@
       @change="onSelectChange"
     >
       <el-option
-        v-for="option in 5"
-        :key="option"
-        :label="option"
+        v-for="option in searchOptions"
+        :key="option.item.path"
+        :label="option.item.title.join(' > ')"
         :value="option"
       ></el-option>
     </el-select>
@@ -27,12 +27,36 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { filterRoutes } from '@/utils/route'
+import { generateRoutes } from './FuseData'
+import { useRouter } from 'vue-router'
+import Fuse from 'fuse.js'
 
 // 控制 search 显示
 const isShow = ref(false)
 // el-select 实例
 const headerSearchSelectRef = ref(null)
+const searchOptions = ref([])
+const router = useRouter()
+const searchPool = computed(() => {
+  const fRoutes = filterRoutes(router.getRoutes())
+  return generateRoutes(fRoutes)
+})
+const fuse = new Fuse(searchPool.value, {
+  shouldSort: true,
+  minMatchCharLength: 1,
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
+})
 const onShowClick = () => {
   isShow.value = !isShow.value
   headerSearchSelectRef.value.focus()
@@ -41,12 +65,18 @@ const onShowClick = () => {
 // search 相关
 const search = ref('')
 // 搜索方法
-const querySearch = () => {
-  console.log('querySearch')
+const querySearch = (query) => {
+  const result = fuse.search(query)
+  if (query !== '') {
+    searchOptions.value = result
+  } else {
+    searchOptions.value = []
+  }
 }
 // 选中回调
-const onSelectChange = () => {
-  console.log('onSelectChange')
+const onSelectChange = (val) => {
+  const { path } = val.item
+  router.push(path)
 }
 </script>
 
