@@ -27,15 +27,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { filterRoutes } from '@/utils/route'
 import { generateRoutes } from './FuseData'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
 
-// 控制 search 显示
 const isShow = ref(false)
-// el-select 实例
 const headerSearchSelectRef = ref(null)
 const searchOptions = ref([])
 const router = useRouter()
@@ -62,9 +60,7 @@ const onShowClick = () => {
   headerSearchSelectRef.value.focus()
 }
 
-// search 相关
 const search = ref('')
-// 搜索方法
 const querySearch = (query) => {
   const result = fuse.search(query)
   if (query !== '') {
@@ -73,11 +69,23 @@ const querySearch = (query) => {
     searchOptions.value = []
   }
 }
-// 选中回调
 const onSelectChange = (val) => {
   const { path } = val.item
   router.push(path)
 }
+const onClose = () => {
+  headerSearchSelectRef.value.blur()
+  isShow.value = false
+  searchOptions.value = []
+}
+watch(isShow, (val) => {
+  if (val) {
+    headerSearchSelectRef.value.focus()
+    document.body.addEventListener('click', onClose)
+  } else {
+    document.body.removeEventListener('click', onClose)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
