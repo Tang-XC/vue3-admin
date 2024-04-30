@@ -13,6 +13,7 @@ const getters = {
   }),
   sidebarOpened: (state) => state.app.sidebarOpened,
   language: (state) => state.app.language,
-  primaryColor: (state) => state.app.primaryColor
+  primaryColor: (state) => state.app.primaryColor,
+  tagsView: (state) => state.app.tagsView
 }
 export default getters

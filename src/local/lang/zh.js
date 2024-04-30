@@ -29,6 +29,13 @@ export default {
       add: '新增',
       edit: '编辑',
       delete: '删除'
+    },
+    contextMenu: {
+      refresh: '刷新',
+      closeCurrent: '关闭当前',
+      closeLeft: '关闭左侧',
+      closeRight: '关闭右侧',
+      closeOther: '关闭其他'
     }
   }
 }
