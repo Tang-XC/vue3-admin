@@ -100,6 +100,7 @@ const onSelect = (val) => {
 .context-menu {
   width: 150px;
   position: fixed;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   .menu-item-icon {
     width: 14px;
     height: 14px;

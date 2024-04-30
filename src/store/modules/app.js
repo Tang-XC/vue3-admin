@@ -33,7 +33,8 @@ export default {
       const beforeTags = _.cloneDeep(state.tagsView)
       if (
         beforeTags[view.index] &&
-        beforeTags[view.index].path === view.currentRoute
+        beforeTags[view.index].path === view.currentRoute &&
+        view.type === 'index'
       ) {
         let path = ''
         if (beforeTags[view.index - 1]) {
@@ -65,7 +66,11 @@ export default {
         case 'left':
           state.tagsView.splice(0, view.index)
           break
+
+        default:
+          break
       }
+      setItem(TAGS_VIEW, state.tagsView)
     }
   }
 }
