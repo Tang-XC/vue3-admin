@@ -5,6 +5,7 @@ import store from './store'
 import installElementPlusIcon from './plugins/elementPlusIcon'
 import installIcons from '@/plugins/icons'
 import i18n from '@/local'
+import installFilter from '@/filters'
 import './permission'
 import '@/styles/index.scss'
 
@@ -30,4 +31,5 @@ const debounce = (callback, delay) => {
 const app = createApp(App)
 installElementPlusIcon(app)
 installIcons(app)
+installFilter(app)
 app.use(store).use(router).use(i18n).mount('#app')
