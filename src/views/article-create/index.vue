@@ -2,7 +2,7 @@
   <div class="article-create">
     <el-input v-model="title"> </el-input>
     <el-tabs v-model="activeName">
-      <el-tab-pane label="写作" name="makrdown">
+      <el-tab-pane label="写作" name="markdown">
         <MarkDown />
       </el-tab-pane>
 
