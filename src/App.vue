@@ -48,7 +48,6 @@ export default defineComponent({
   watch: {
     $route: {
       handler(newVal, oldVal) {
-        console.log(newVal)
         const whiteList = ['/', '/login', '/404', '/401']
         if (!whiteList.includes(newVal.path)) {
           this.$store.commit('app/addTagsView', {

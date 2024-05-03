@@ -9,13 +9,21 @@ const whiteList = ['/login', '/404']
  * @param {*} from 从哪里来
  * @param {*} next 放行
  */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (store.getters.token) {
     if (to.path === '/login') {
       next('/')
     } else {
       if (!store.getters.hasUserInfo) {
-        store.dispatch('user/getUserInfo')
+        const { permission } = await store.dispatch('user/getUserInfo')
+        const filterRoutes = await store.dispatch(
+          'permission/filterRoutes',
+          permission.menus
+        )
+        filterRoutes.forEach((item) => {
+          router.addRoute(item)
+        })
+        return next(to.path)
       }
       next()
     }

@@ -8,8 +8,22 @@
         style="width: 100%"
         v-loading="props.loading"
       >
+        <el-table-column type="expand" v-if="props.isExpand">
+          <template #default="{ row }">
+            <el-table :data="row.children">
+              <template v-for="subColumn in props.columns" :key="subColumn.key">
+                <el-table-column
+                  :prop="subColumn.key"
+                  :label="subColumn.label"
+                  :width="subColumn.width"
+                />
+              </template>
+            </el-table>
+          </template>
+        </el-table-column>
         <template v-for="column in props.columns" :key="column.key">
           <el-table-column
+            v-if="!column.children"
             :prop="column.key"
             :label="column.label"
             :width="column.width"
@@ -53,6 +67,10 @@ const props = defineProps({
   pagination: {
     type: Object,
     default: () => ({})
+  },
+  isExpand: {
+    type: Boolean,
+    default: false
   }
 })
 const currentPage = ref(props.pagination.current || 1)

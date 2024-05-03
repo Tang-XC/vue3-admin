@@ -6,3 +6,17 @@ export const getUserManageList = (params) => {
     params: params
   })
 }
+export const getRoleList = (params) => {
+  return request({
+    url: '/role/list',
+    method: 'get',
+    params: params
+  })
+}
+export const getPermissionList = (params) => {
+  return request({
+    url: '/permission/list',
+    method: 'get',
+    params: params
+  })
+}
