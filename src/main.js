@@ -6,6 +6,7 @@ import installElementPlusIcon from './plugins/elementPlusIcon'
 import installIcons from '@/plugins/icons'
 import i18n from '@/local'
 import installFilter from '@/filters'
+import installDirective from '@/directives'
 import './permission'
 import '@/styles/index.scss'
 
@@ -32,4 +33,5 @@ const app = createApp(App)
 installElementPlusIcon(app)
 installIcons(app)
 installFilter(app)
+installDirective(app)
 app.use(store).use(router).use(i18n).mount('#app')
