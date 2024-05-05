@@ -7,6 +7,7 @@ export default {
     title: 'user',
     icon: 'personnel'
   },
+  name: 'userManage',
   children: [
     {
       path: '/user/manage',

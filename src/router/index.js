@@ -60,7 +60,7 @@ export function resetRouter() {
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: [...publicRoutes, ...privateRoutes]
+  routes: [...publicRoutes]
 })
 
 export default router

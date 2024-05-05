@@ -3,6 +3,7 @@ export default {
   path: '/article',
   component: layout,
   redirect: '/article/ranking',
+  name: 'articleRanking',
   meta: {
     title: 'article',
     icon: 'article'

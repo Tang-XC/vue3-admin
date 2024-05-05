@@ -15,6 +15,7 @@ router.beforeEach(async (to, from, next) => {
       next('/')
     } else {
       if (!store.getters.hasUserInfo) {
+        console.log(router.getRoutes())
         const { permission } = await store.dispatch('user/getUserInfo')
         const filterRoutes = await store.dispatch(
           'permission/filterRoutes',
@@ -23,6 +24,7 @@ router.beforeEach(async (to, from, next) => {
         filterRoutes.forEach((item) => {
           router.addRoute(item)
         })
+
         return next(to.path)
       }
       next()

@@ -3,6 +3,7 @@ export default {
   path: '/user',
   component: layout,
   redirect: '/user/manage',
+  name: 'permissionList',
   meta: {
     title: 'user',
     icon: 'personnel'

@@ -12,7 +12,6 @@ export default {
   actions: {
     filterRoutes(context, menus) {
       const routes = []
-      console.log(privateRoutes)
       menus.forEach((key) => {
         routes.push(...privateRoutes.filter((item) => item.name === key))
       })
